@@ -12,4 +12,12 @@ public class GuessNumber {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
+
+    public static boolean compareNumber(int numberA,int numberB){
+        return numberA == numberB;
+    }
+
+    public static void print(String outputInfo){
+        System.out.println(outputInfo);
+    }
 }

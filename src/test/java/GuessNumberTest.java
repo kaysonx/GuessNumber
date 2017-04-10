@@ -1,6 +1,8 @@
 import org.junit.Test;
 
+import static me.cyansong.guessnumber.GuessNumber.compareNumber;
 import static me.cyansong.guessnumber.GuessNumber.getRandomNumber;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class GuessNumberTest {
@@ -13,4 +15,17 @@ public class GuessNumberTest {
         assertTrue("Error, random is too low",  low  <= generatedNumber);
     }
 
+    @Test
+    public void should_compare_userInput_with_generated_number_when_not_equal(){
+        final int generatedNumber = 66;
+        int userInput = 19;
+        assertEquals(compareNumber(generatedNumber,userInput),false);
+    }
+
+    @Test
+    public void should_compare_userInput_with_generated_number_when_is_equal(){
+        final int generatedNumber = 66;
+        int userInput = 66;
+        assertEquals(compareNumber(generatedNumber,userInput),true);
+    }
 }
