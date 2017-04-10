@@ -4,7 +4,7 @@ version '1.0-SNAPSHOT'
 apply plugin: 'java'
 apply plugin: 'application'
 
-mainClassName ='me.cyansong.guessnumber.GuessNumber'
+mainClassName ='me.cyansong.guessnumber.Main'
 
 sourceCompatibility = 1.8
 
@@ -21,6 +21,6 @@ run {
 
 jar{
     manifest{
-        attributes("Main-Class":"me.cyansong.guessnumber.GuessNumber")
+        attributes("Main-Class":"me.cyansong.guessnumber.Main")
     }
 }

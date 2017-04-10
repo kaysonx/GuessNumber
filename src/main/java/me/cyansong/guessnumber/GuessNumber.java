@@ -1,60 +1,53 @@
 package me.cyansong.guessnumber;
 
-import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class GuessNumber {
-    public static void main(String[] args) {
-        final int maxErrorCount = 5;
-        final int generatedNumber = getRandomNumber(1, 100);
-        int count = 0;
+    private final int generatedNumber;
+    private final int maxErrorCount;
+    private int count = 0;
 
-        while (true){
-            print("请输入你猜的数字：");
-            CompareResult compareResult = compareNumber(getInputFromConsole(), generatedNumber);
-            count++;
-            print(getPrintInfo(compareResult, count));
-            if(compareResult == CompareResult.EQUAL){
-                break;
-            }
-            if(maxErrorCount == count){
-                print("你已经猜错了"+maxErrorCount+"次，正确答案是 "+generatedNumber+" 游戏结束！");
-                break;
-            }
-        }
+    public GuessNumber(int min, int max, int maxErrorCount){
+        this.generatedNumber = this.getRandomNumber(min, max);
+        this.maxErrorCount = maxErrorCount;
+        this.count = 0;
     }
 
-    public static int getRandomNumber(int min, int max){
+    public GuessResult guessNumberCore(int inputNumber){
+        CompareResult compareResult = compareNumber(inputNumber, generatedNumber);
+        this.count++;
+        if(compareResult == CompareResult.EQUAL){
+            return GuessResult.RIGHT;
+        }
+        if(checkGuessNumber(this.count, this.maxErrorCount)){
+            return GuessResult.RUNOUTCOUNT;
+        }
+        return compareResult == CompareResult.LESS?GuessResult.LESS:GuessResult.GREATER;
+    }
+
+    private boolean checkGuessNumber(int count, int maxErrorCount){
+        if(count == maxErrorCount){
+            return true;
+        }
+        return false;
+    }
+
+    private int getRandomNumber(int min, int max){
         return ThreadLocalRandom.current().nextInt(min, max + 1);
     }
 
-    public static int getInputFromConsole(){
-        Scanner scanner = new Scanner(System.in);
-        try {
-            return scanner.nextInt();
-        }catch (Exception ex){
-            return -1;
-        }
-    }
-
-    public static void print(String outputInfo){
-        System.out.println(outputInfo);
-    }
-
-    public static CompareResult compareNumber(int numberA,int numberB){
+    public CompareResult compareNumber(int numberA,int numberB){
         if(numberA == numberB){
             return CompareResult.EQUAL;
         }
         return numberA < numberB ? CompareResult.LESS:CompareResult.GREATER;
     }
 
-    public static String getPrintInfo(CompareResult compareResult,int count){
-        if(compareResult == CompareResult.LESS){
-            return "你猜的数太小了！当前已经猜了："+count+"次";
-        }
-        if(compareResult == CompareResult.GREATER){
-            return  "你猜的数太大了！当前已经猜了："+count+"次";
-        }
-        return "猜对了！你一共猜了："+count+"次";
+    public int getGeneratedNumber() {
+        return generatedNumber;
+    }
+
+    public int getCount() {
+        return count;
     }
 }
