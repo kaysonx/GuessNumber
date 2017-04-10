@@ -4,12 +4,12 @@ import java.util.Scanner;
 import static me.cyansong.guessnumber.GuessResult.*;
 
 public class Main {
-
     public static void main(String[] args) {
         GuessNumber guessNumber = new GuessNumber(1, 10, 5);
         while (true) {
+            print("请输入你猜的数：");
             GuessResult guessResult = guessNumber.guessNumberCore(getInputFromConsole());
-            print(getPrintInfo(guessResult));
+            print(getPrintInfo(guessResult, guessNumber.getCount()));
             if (isQuit(guessResult)) {
                 break;
             }
@@ -23,20 +23,20 @@ public class Main {
         return false;
     }
 
-    public static String getPrintInfo(GuessResult guessResult) {
+    public static String getPrintInfo(GuessResult guessResult, int count) {
         String printInfo = "";
         switch (guessResult) {
             case RIGHT:
-                printInfo = "猜对了！";
+                printInfo = "猜对了！你一共猜了"+count+"次";
                 break;
             case LESS:
-                printInfo = "你猜的数太小了！";
+                printInfo = "你猜的数太小了！已经猜了"+count+"次";
                 break;
             case GREATER:
-                printInfo = "你猜的数太大了";
+                printInfo = "你猜的数太大了！已经猜了"+count+"次";
                 break;
             case RUNOUTCOUNT:
-                printInfo = "你的次数已经用完！";
+                printInfo = "你的次数已经用完！正确答案是："+count;
                 break;
         }
         return printInfo;

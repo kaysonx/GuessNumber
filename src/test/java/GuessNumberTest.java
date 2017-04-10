@@ -51,28 +51,28 @@ public class GuessNumberTest {
 
     @Test
     public void should_get_info_when_guessNumber_is_lessThan(){
-        String printInfo = getPrintInfo(GuessResult.LESS);
-        String expectInfo = "你猜的数太小了！";
+        String printInfo = getPrintInfo(GuessResult.LESS,2);
+        String expectInfo = "你猜的数太小了！已经猜了2次";
         assertEquals(printInfo,printInfo);
     }
     @Test
     public void should_get_info_when_guessNumber_is_greaterThan(){
-        String printInfo = getPrintInfo(GuessResult.GREATER);
-        String expectInfo = "你猜的数太大了！";
+        String printInfo = getPrintInfo(GuessResult.GREATER,2);
+        String expectInfo = "你猜的数太大了！已经猜了2次";
         assertEquals(printInfo,printInfo);
     }
 
     @Test
     public void should_get_info_when_guessNumber_is_equal(){
-        String printInfo = getPrintInfo(GuessResult.RIGHT);
-        String expectInfo = "猜对了！";
+        String printInfo = getPrintInfo(GuessResult.RIGHT,2);
+        String expectInfo = "猜对了！你一共猜了2次";
         assertEquals(printInfo,printInfo);
     }
 
     @Test
     public void should_get_info_when_guessNumber_runout_count(){
-        String printInfo = getPrintInfo(GuessResult.RUNOUTCOUNT);
-        String expectInfo = "你的次数已经用完！";
+        String printInfo = getPrintInfo(GuessResult.RUNOUTCOUNT,2);
+        String expectInfo = "你的次数已经用完！正确答案是"+guessNumber.getCount();
         assertEquals(printInfo,printInfo);
     }
 }
