@@ -1,6 +1,7 @@
 package me.cyansong.guessnumber;
 
 import java.util.Scanner;
+
 import static me.cyansong.guessnumber.GuessResult.*;
 
 public class Main {
@@ -17,7 +18,7 @@ public class Main {
     }
 
     private static boolean isQuit(GuessResult guessResult) {
-        if(guessResult != LESS && guessResult != GREATER){
+        if (guessResult != LESS && guessResult != GREATER) {
             return true;
         }
         return false;
@@ -27,16 +28,16 @@ public class Main {
         String printInfo = "";
         switch (guessResult) {
             case RIGHT:
-                printInfo = "猜对了！你一共猜了"+count+"次";
+                printInfo = "猜对了！你一共猜了" + count + "次";
                 break;
             case LESS:
-                printInfo = "你猜的数太小了！已经猜了"+count+"次";
+                printInfo = "你猜的数太小了！已经猜了" + count + "次";
                 break;
             case GREATER:
-                printInfo = "你猜的数太大了！已经猜了"+count+"次";
+                printInfo = "你猜的数太大了！已经猜了" + count + "次";
                 break;
             case RUNOUTCOUNT:
-                printInfo = "你的次数已经用完！正确答案是："+count;
+                printInfo = "你的次数已经用完！正确答案是：" + count;
                 break;
         }
         return printInfo;

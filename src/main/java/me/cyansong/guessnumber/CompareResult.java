@@ -1,6 +1,6 @@
 package me.cyansong.guessnumber;
 
-public enum CompareResult{
+public enum CompareResult {
     EQUAL,
     LESS,
     GREATER
